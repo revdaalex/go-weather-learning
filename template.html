@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Погода Сима-ленд</title>
+</head>
+<body>
+  <h1>{{.Name}}</h1>
+  <ul>
+      <li>{{.Main.Temp}}  Температура</li>
+      <li>{{.Main.TempMin}}  Минимальная температура</li>
+      <li>{{.Main.TempMax}}  Максимальная температура</li>
+      <li>{{.Wind.Speed}}    Скорость ветра</li>
+      <li>{{.Wind.Deg}}      Направление ветра в градусах</li>
+      <li>{{.Main.Humidity}} Влажность</li>
+      <li>{{.Main.Pressure}} Атмосферное давление</li>
+  </ul>
+</body>
+</html>
