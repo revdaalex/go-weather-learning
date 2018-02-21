@@ -34,37 +34,49 @@ type WeatherBase struct {
 	Descr   []WeatherDescr `json:"weather"`
 }
 
-func main() {
+type ChooseСity struct {
+	City string
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request)  {
 	tmpl, err := template.New("template.html").ParseFiles("template.html")
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		defer r.Body.Close()
+	defer r.Body.Close()
 
-		c := http.Client{}
-		resp, err := c.Get("http://api.openweathermap.org/data/2.5/weather?q=Yekaterinburg,ru&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2")
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
-		}
+	c := http.Client{}
+	ci := ChooseСity{}
+	ci.City = "Yekaterinburg"
+	if r.Method == http.MethodPost {
+		ci.City = r.FormValue("title")
+	}
+	resp, err := c.Get("http://api.openweathermap.org/data/2.5/weather?q=" + ci.City + ",ru&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2")
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 
-		defer resp.Body.Close()
-		body, _ := ioutil.ReadAll(resp.Body)
-		weather := WeatherBase{}
+	defer resp.Body.Close()
+	body, _ := ioutil.ReadAll(resp.Body)
+	weather := WeatherBase{}
 
-		err = json.Unmarshal(body, &weather)
-		if err != nil {
-			log.Fatal(err)
-		}
+	err = json.Unmarshal(body, &weather)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-		err = tmpl.Execute(w, weather)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-	})
+	err = tmpl.Execute(w, weather)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func main() {
+	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/City", indexHandler)
 
 	http.HandleFunc("/style.css", func(w http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "style.css")
