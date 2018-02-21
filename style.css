@@ -6,7 +6,6 @@ body {
 }
 div, ul, p, header {
     display: block;
-    padding: 0;
     margin: 0;
 }
 
@@ -17,11 +16,39 @@ header {
     background: #e4f1f9;
     padding: 12px 18px;
 }
-header h1, header h2 {
-    padding: 0;
-    margin: 0;
-    line-height: 1;
-    margin-left: 16px;
+header .header__descr {
+     padding: 0 35px;
+     margin: 0;
+     line-height: 1;
+}
+header form {
+    position: relative;
+}
+header form:before {
+    position: absolute;
+    top: 15px;
+    left: 8px;
+    content: '';
+    border: solid 10px transparent;
+    border-top-color: #000;
+}
+header select {
+    padding-left: 35px;
+    position: relative;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    font-size: 280%;
+    font-weight: 800;
+    font-family: sans-serif;
+}
+header select:after {
+    content: '+';
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    border: solid 10px #333;
 }
 header .icon object {
     width: 64px;

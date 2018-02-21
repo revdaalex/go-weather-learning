@@ -1,11 +1,11 @@
 package main
 
 import (
-	"net/http"
-	"io/ioutil"
 	"encoding/json"
-	"log"
 	"html/template"
+	"io/ioutil"
+	"log"
+	"net/http"
 )
 
 type WeatherTemp struct {
@@ -18,8 +18,8 @@ type WeatherTemp struct {
 
 type WeatherWind struct {
 	Speed float64 `json:"speed"`
-	Deg   float64   `json:"deg"`
-} 
+	Deg   float64 `json:"deg"`
+}
 
 type WeatherDescr struct {
 	Icon string `json:"icon"`
@@ -27,18 +27,18 @@ type WeatherDescr struct {
 }
 
 type WeatherBase struct {
-	Base    string         `json:"base"`
-	Main    WeatherTemp    `json:"main"`
-	Name    string         `json:"name"`
-	Wind    WeatherWind    `json:"wind"`
-	Descr   []WeatherDescr `json:"weather"`
+	Base  string         `json:"base"`
+	Main  WeatherTemp    `json:"main"`
+	Name  string         `json:"name"`
+	Wind  WeatherWind    `json:"wind"`
+	Descr []WeatherDescr `json:"weather"`
 }
 
 type ChooseСity struct {
 	City string
 }
 
-func indexHandler(w http.ResponseWriter, r *http.Request)  {
+func indexHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl, err := template.New("template.html").ParseFiles("template.html")
 	if err != nil {
 		log.Fatal(err)

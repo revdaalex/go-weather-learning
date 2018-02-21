@@ -6,19 +6,26 @@
     <title>Погода Сима-ленд</title>
 </head>
 <body>
-<header>
-    <div class="icon">
-        {{range .Descr}}
-        <object data="https://unpkg.com/open-weather-icons@0.0.7/src/svg/{{.Icon}}.svg" type=""></object>
+    <header>
+        <div class="icon">
+            {{range .Descr}}
+            <object data="https://unpkg.com/open-weather-icons@0.0.7/src/svg/{{.Icon}}.svg" type=""></object>
+            {{end}}
+        </div>
+        <div class="header__info">
+            <form method="POST" action="/City">
+                <select name="city" onchange="this.form.submit()" class="header__city">
+                    <option value="Yekaterinburg">Екатеринбург</option>
+                    <option value="Revda">Ревда</option>
+                    <option value="Rezh">Реж</option>
+                    <option value="Aramil">Арамиль</option>
+                </select>
+            </form>
+            {{range .Descr}}
+            <h2 class="header__descr">{{.Full}}</h2>
+        </div>
         {{end}}
-    </div>
-    <div class="header__info">
-        <h1>{{.Name}}</h1>
-        {{range .Descr}}
-        <h2>{{.Full}}</h2>
-    </div>
-        {{end}}
-</header>
+    </header>
     <ul class="stats">
         <li class="stat stat_temp">
             {{.Main.Temp}}
@@ -49,18 +56,8 @@
             <span class="stat_descr">Атмосферное давление</span>
         </li>
     </ul>
-<form role="form" method="POST" action="/City">
-    <input type="hidden" name="id" value="id" />
-    <div class="form-group">
-        <label>Title</label>
-        <select name="city"> <!--Supplement an id here instead of using 'text'-->
-            <option value="Yekaterinburg" selected>Екатеринбург</option>
-            <option value="Revda">Ревда</option>
-            <option value="Rezh">Реж</option>
-            <option value="Aramil">Арамиль</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-default">Выбрать</button>
-</form>
+    <script>
+        document.querySelector(`option[value="{{.Name}}"]`).setAttribute('selected', 'selected');
+    </script>
 </body>
 </html>
