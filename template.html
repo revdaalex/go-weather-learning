@@ -2,18 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" />
     <title>Погода Сима-ленд</title>
 </head>
 <body>
-  <h1>{{.Name}}</h1>
-  <ul>
-      <li>{{.Main.Temp}}  Температура</li>
-      <li>{{.Main.TempMin}}  Минимальная температура</li>
-      <li>{{.Main.TempMax}}  Максимальная температура</li>
-      <li>{{.Wind.Speed}}    Скорость ветра</li>
-      <li>{{.Wind.Deg}}      Направление ветра в градусах</li>
-      <li>{{.Main.Humidity}} Влажность</li>
-      <li>{{.Main.Pressure}} Атмосферное давление</li>
-  </ul>
+<header>
+    <div class="icon">
+        {{range .Descr}}
+        <object data="https://unpkg.com/open-weather-icons@0.0.7/src/svg/{{.Icon}}.svg" type=""></object>
+        {{end}}
+    </div>
+    <h1>{{.Name}}</h1>
+</header>
+    <ul class="stats">
+        <li class="stat stat_temp">
+            {{.Main.Temp}}
+            <span class="stat_descr">Температура</span>
+        </li>
+        <li class="stat stat_temp">
+            {{.Main.TempMin}}
+            <span class="stat_descr">Минимальная температура</span>
+        </li>
+        <li class="stat stat_temp">
+            {{.Main.TempMax}}
+            <span class="stat_descr">Максимальная температура</span>
+        </li>
+        <li class="stat">
+            {{.Wind.Speed}}
+            <span class="stat_descr">Скорость ветра</span>
+        </li>
+        <li class="stat">
+            {{.Wind.Deg}}
+            <span class="stat_descr">Направление ветра в градусах</span>
+        </li>
+        <li class="stat">
+            {{.Main.Humidity}}
+            <span class="stat_descr">Влажность</span>
+        </li>
+        <li class="stat">
+            {{.Main.Pressure}}
+            <span class="stat_descr">Атмосферное давление</span>
+        </li>
+    </ul>
 </body>
 </html>

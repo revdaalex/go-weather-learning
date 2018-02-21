@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    padding: 0;
+    font: 13px sans-serif;
+    background: #3e94ca;
+}
+div, ul, p, header {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    background: #e4f1f9;
+    padding: 12px 18px;
+}
+
+header h1 {
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    margin-left: 16px;
+}
+header .icon object {
+    width: 64px;
+}
+.stats {
+    background: #56a5d6;
+    color: #fff;
+    padding: 16px;
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+.stats .stat {
+    position: relative;
+    font-size: 48px;
+    margin: 0 15px;
+    text-align: center;
+}
+.stat_temp:after {
+    content: '˚C';
+    font-size: 13px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.stat_descr {
+    display: block;
+    font-size: 13px;
+}

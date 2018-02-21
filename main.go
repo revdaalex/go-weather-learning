@@ -13,19 +13,25 @@ type WeatherTemp struct {
 	TempMin  float64 `json:"temp_min"`
 	TempMax  float64 `json:"temp_max"`
 	Humidity int32   `json:"humidity"`
-	Pressure int32   `json:"pressure"`
+	Pressure float64 `json:"pressure"`
 }
 
 type WeatherWind struct {
-	Speed int32 `json:"speed"`
-	Deg   int32 `json:"deg"`
+	Speed float64 `json:"speed"`
+	Deg   float64   `json:"deg"`
 } 
 
+type WeatherDescr struct {
+	Icon string `json:"icon"`
+	Full string `json:"description"`
+}
+
 type WeatherBase struct {
-	Base    string        `json:"base"`
-	Main    WeatherTemp   `json:"main"`
-	Name    string        `json:"name"`
-	Wind    WeatherWind   `json:"wind"`
+	Base    string         `json:"base"`
+	Main    WeatherTemp    `json:"main"`
+	Name    string         `json:"name"`
+	Wind    WeatherWind    `json:"wind"`
+	Descr   []WeatherDescr `json:"weather"`
 }
 
 func main() {
@@ -58,6 +64,10 @@ func main() {
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
+	})
+
+	http.HandleFunc("/style.css", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "style.css")
 	})
 
 	http.ListenAndServe(":8081", nil)
