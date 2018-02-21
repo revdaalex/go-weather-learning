@@ -44,7 +44,7 @@ header .icon object {
 .stat:after {
     font-size: 13px;
     position: absolute;
-    top: 0;
+    top: -10px;
     right: 0;
 }
 .stat_temp:after {
@@ -61,7 +61,6 @@ header .icon object {
 }
 .stat_pressure:after {
     content: 'мм рт. ст.';
-    top: -10px;
 }
 .stat_descr {
     display: block;
