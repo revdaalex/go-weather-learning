@@ -12,7 +12,12 @@
         <object data="https://unpkg.com/open-weather-icons@0.0.7/src/svg/{{.Icon}}.svg" type=""></object>
         {{end}}
     </div>
-    <h1>{{.Name}}</h1>
+    <div class="header__info">
+        <h1>{{.Name}}</h1>
+        {{range .Descr}}
+        <h2>{{.Full}}</h2>
+    </div>
+        {{end}}
 </header>
     <ul class="stats">
         <li class="stat stat_temp">
@@ -27,19 +32,19 @@
             {{.Main.TempMax}}
             <span class="stat_descr">Максимальная температура</span>
         </li>
-        <li class="stat">
+        <li class="stat stat_wind">
             {{.Wind.Speed}}
             <span class="stat_descr">Скорость ветра</span>
         </li>
-        <li class="stat">
+        <li class="stat stat_winddeg">
             {{.Wind.Deg}}
             <span class="stat_descr">Направление ветра в градусах</span>
         </li>
-        <li class="stat">
+        <li class="stat stat_humidity">
             {{.Main.Humidity}}
             <span class="stat_descr">Влажность</span>
         </li>
-        <li class="stat">
+        <li class="stat stat_pressure">
             {{.Main.Pressure}}
             <span class="stat_descr">Атмосферное давление</span>
         </li>
