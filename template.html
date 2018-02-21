@@ -49,5 +49,18 @@
             <span class="stat_descr">Атмосферное давление</span>
         </li>
     </ul>
+<form role="form" method="POST" action="/City">
+    <input type="hidden" name="id" value="id" />
+    <div class="form-group">
+        <label>Title</label>
+        <select name="city"> <!--Supplement an id here instead of using 'text'-->
+            <option value="Yekaterinburg" selected>Екатеринбург</option>
+            <option value="Revda">Ревда</option>
+            <option value="Rezh">Реж</option>
+            <option value="Aramil">Арамиль</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-default">Выбрать</button>
+</form>
 </body>
 </html>
