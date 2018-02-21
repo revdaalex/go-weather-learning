@@ -51,7 +51,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request)  {
 	ci := ChooseСity{}
 	ci.City = "Yekaterinburg"
 	if r.Method == http.MethodPost {
-		ci.City = r.FormValue("title")
+		ci.City = r.FormValue("city")
 	}
 	resp, err := c.Get("http://api.openweathermap.org/data/2.5/weather?q=" + ci.City + ",ru&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2")
 	if err != nil {
