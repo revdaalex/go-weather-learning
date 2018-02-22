@@ -15,10 +15,17 @@
         <div class="header__info">
             <form method="POST" action="/City">
                 <select name="city" onchange="this.form.submit()" class="header__city">
+                    <option value="Aramil">Арамиль</option>
+                    <option value="Asbest">Асбест</option>
+                    <option value="Verkhnyaya Pyshma">Верхняя Пышма</option>
                     <option value="Yekaterinburg">Екатеринбург</option>
+                    <option value="Kamensk-Uralsky">Каменск-Уральский</option>
+                    <option value="Nizhny Tagil">Нижний Тагил</option>
+                    <option value="Pervouralsk">Первоуральск</option>
+                    <option value="Polevskoy">Полевской</option>
                     <option value="Revda">Ревда</option>
                     <option value="Rezh">Реж</option>
-                    <option value="Aramil">Арамиль</option>
+                    <option value="Serov">Серов</option>
                 </select>
             </form>
             {{range .Descr}}
@@ -56,6 +63,27 @@
             <span class="stat_descr">Атмосферное давление</span>
         </li>
     </ul>
+    <div id="background-wrap">
+        <div class="x1">
+            <div class="cloud"></div>
+        </div>
+
+        <div class="x2">
+            <div class="cloud"></div>
+        </div>
+
+        <div class="x3">
+            <div class="cloud"></div>
+        </div>
+
+        <div class="x4">
+            <div class="cloud"></div>
+        </div>
+
+        <div class="x5">
+            <div class="cloud"></div>
+        </div>
+    </div>
     <script>
         document.querySelector(`option[value="{{.Name}}"]`).setAttribute('selected', 'selected');
     </script>
