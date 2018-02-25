@@ -43,6 +43,8 @@ type Template struct {
 	templates *template.Template
 }
 
+var url string
+
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	return t.templates.ExecuteTemplate(w, name, data)
 }
@@ -57,7 +59,13 @@ func indexHandler(c echo.Context) error  {
 		ci.City = c.FormValue("city")
 	}
 
-	resp, err := cl.Get("http://api.openweathermap.org/data/2.5/weather?q=" + ci.City + ",ru&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2")
+	if ci.City == "Revda" {
+		url = "http://api.openweathermap.org/data/2.5/weather?id=502011&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2"
+	} else {
+		url = "http://api.openweathermap.org/data/2.5/weather?q=" + ci.City + ",ru&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2"
+	}
+
+	resp, err := cl.Get(url)
 		if err != nil {
 			c.Response().WriteHeader(http.StatusInternalServerError)
 			return nil
