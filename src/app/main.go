@@ -35,15 +35,13 @@ type WeatherBase struct {
 	Descr []WeatherDescr `json:"weather"`
 }
 
-type ChooseСity struct {
-	City string
-}
-
 type Template struct {
 	templates *template.Template
 }
 
 var url string
+
+var City string
 
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	return t.templates.ExecuteTemplate(w, name, data)
@@ -52,17 +50,16 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 func indexHandler(c echo.Context) error  {
 	defer c.Request().Body.Close()
 	cl := http.Client{}
-	ci := ChooseСity{}
-	ci.City = "Yekaterinburg"
+	City = "Yekaterinburg"
 
 	if c.Request().Method == http.MethodPost {
-		ci.City = c.FormValue("city")
+		City = c.FormValue("city")
 	}
 
-	if ci.City == "Revda" {
+	if City == "Revda" {
 		url = "http://api.openweathermap.org/data/2.5/weather?id=502011&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2"
 	} else {
-		url = "http://api.openweathermap.org/data/2.5/weather?q=" + ci.City + ",ru&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2"
+		url = "http://api.openweathermap.org/data/2.5/weather?q=" + City + ",ru&lang=ru&units=metric&appid=b0e8c750497d3d6add4e1b144715e5b2"
 	}
 
 	resp, err := cl.Get(url)
